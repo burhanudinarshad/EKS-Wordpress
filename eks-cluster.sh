@@ -6,17 +6,17 @@ CLUSTER_NAME=ca-gov-wpaas
 
 
 ############   get WEB Subnet IDs #################################################################################
-WebSubnet_eus1a=$(aws ec2 describe-subnets --filters "Name=vpc-id,Values=$Vpc_ID" "Name=availability-zone,Values=us-east-1a" \
-"Name=availability-zone,Values=us-east-1a" "Name=tag:Name,Values=WebSubnet*" \
+privateSubnet_eus1a=$(aws ec2 describe-subnets --filters "Name=vpc-id,Values=$Vpc_ID" "Name=availability-zone,Values=us-east-1a" \
+"Name=availability-zone,Values=us-east-1a" "Name=tag:Name,Values=privateSubnet*" \
 --query "Subnets[0].SubnetId" --output text)
 
-WebSubnet_eus1b=$(aws ec2 describe-subnets \
+privateSubnet_eus1b=$(aws ec2 describe-subnets \
 --filters "Name=vpc-id,Values=$Vpc_ID" "Name=availability-zone,Values=us-east-1b" \
- "Name=tag:Name,Values=WebSubnet*" \
+ "Name=tag:Name,Values=privateSubnet*" \
 --query "Subnets[0].SubnetId" --output text)
 
-WebSubnet_eus1c=$(aws ec2 describe-subnets \
---filters "Name=vpc-id,Values=$Vpc_ID" "Name=availability-zone,Values=us-east-1c" "Name=tag:Name,Values=WebSubnet*" \
+privateSubnet_eus1c=$(aws ec2 describe-subnets \
+--filters "Name=vpc-id,Values=$Vpc_ID" "Name=availability-zone,Values=us-east-1c" "Name=tag:Name,Values=privateSubnet*" \
 --query "Subnets[0].SubnetId" --output text)
 
 ##############get Public Subnet IDs ####################################################################################
@@ -32,14 +32,14 @@ publicsubnet_eus1c=$(aws ec2 describe-subnets \
 --filters "Name=vpc-id,Values=$Vpc_ID" "Name=availability-zone,Values=us-east-1c" "Name=tag:Name,Values=PublicSubnet*" \
 --query "Subnets[0].SubnetId" --output text)
 
-echo "WebSubnet_eus1a $WebSubnet_eus1a"
-echo "WebSubnet_eus1b $WebSubnet_eus1b"
-echo "WebSubnet_eus1c $WebSubnet_eus1c"
+echo "privateSubnet_eus1a -  $privateSubnet_eus1a"
+echo "privateSubnet_eus1b -  $privateSubnet_eus1b"
+echo "privateSubnet_eus1c -  $privateSubnet_eus1c"
 
 
-echo "publicsubnet_eus1a $publicsubnet_eus1a"
-echo "publicsubnet_eus1b $publicsubnet_eus1b"
-echo "publicsubnet_eus1c $publicsubnet_eus1c"
+echo "publicsubnet_eus1a - $publicsubnet_eus1a"
+echo "publicsubnet_eus1b -  $publicsubnet_eus1b"
+echo "publicsubnet_eus1c -  $publicsubnet_eus1c"
 
 
 #----------------------Create Cluster with managed node groups 
@@ -60,9 +60,9 @@ vpc:
       us-east-1b: { id: $publicsubnet_eus1b }
       us-east-1c: { id: $publicsubnet_eus1c }
     private:
-      us-east-1a: { id: $WebSubnet_eus1a }
-      us-east-1b: { id: $WebSubnet_eus1b }
-      us-east-1c: { id: $WebSubnet_eus1c }
+      us-east-1a: { id: $privateSubnet_eus1a }
+      us-east-1b: { id: $privateSubnet_eus1b }
+      us-east-1c: { id: $privateSubnet_eus1c }
 
 managedNodeGroups:
   - name: managed-external-ng-1
