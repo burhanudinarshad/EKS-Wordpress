@@ -1,6 +1,6 @@
 STACK_NAME=wptest20
 
-Vpc_ID=$(aws cloudformation describe-stacks --stack-name "$STACK_NAME" --query "Stacks[0].Outputs[?OutputKey=='Vpc'].OutputValue" --output text)
+#Vpc_ID=$(aws cloudformation describe-stacks --stack-name "$STACK_NAME" --query "Stacks[0].Outputs[?OutputKey=='Vpc'].OutputValue" --output text)
 AWS_REGION=us-east-1
 CLUSTER_NAME=ca-gov-wpaas
 
