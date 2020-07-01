@@ -69,7 +69,7 @@ managedNodeGroups:
     instanceType: t2.micro
     minSize: 3
     maxSize: 5
-    desiredCapacity: 3
+    desiredCapacity: 4
     volumeSize: 20
     privateNetworking: true
     ssh:
