@@ -228,8 +228,8 @@ alertmanager:
     loadBalancerIP: ""
     loadBalancerSourceRanges: []
     servicePort: 80
-    nodePort: 30900
-    type: NodePort
+    # nodePort: 30000
+    type: ClusterIP
 
 ## Monitors ConfigMap changes and POSTs to a URL
 ## Ref: https://github.com/jimmidyson/configmap-reload
