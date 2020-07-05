@@ -8,7 +8,7 @@ imagePullSecrets:
 ##
 serviceAccounts:
   alertmanager:
-    create: true
+    create: false
     name:
   kubeStateMetrics:
     create: true
